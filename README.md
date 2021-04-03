@@ -20,6 +20,7 @@ Request :
       "id" : "string, unique",
       "name" : "string",
       "email" : "string",
+      "password" : "string",
       "gender" : "string",
       "phone" : "string"
   }
@@ -121,6 +122,7 @@ Request :
       "id" : "string, unique",
       "name" : "string",
       "email" : "string",
+      "password" : "string",
       "gender" : "string",
       "phone" : "string"
   }
