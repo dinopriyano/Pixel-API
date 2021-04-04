@@ -1,10 +1,7 @@
 package id.dupat.pixel.service
 
 import id.dupat.pixel.entity.User
-import id.dupat.pixel.model.user.CreateUserRequest
-import id.dupat.pixel.model.user.ListUserRequest
-import id.dupat.pixel.model.user.UpdateUserRequest
-import id.dupat.pixel.model.user.UserResponse
+import id.dupat.pixel.model.user.*
 import org.springframework.data.domain.Page
 
 interface UserService {
@@ -18,5 +15,7 @@ interface UserService {
     fun delete(id: String)
 
     fun list(listUserRequest: ListUserRequest): Page<User>
+
+    fun changePassword(id: String, changePasswordRequest: ChangePasswordRequest): UserResponse
 
 }

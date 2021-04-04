@@ -146,6 +146,41 @@ Request :
       }
   }
   ```
+
+  ## Change Password
+
+  Request :
+
+  - Method : PUT
+  - Endpoint : `/api/users/{id_user}/changepassword`
+  - Header :
+    - Content-Type: application/json
+    - Accept: application/json
+  - Body :
+
+  ```json
+  {
+      "oldPassword" : "string",
+      "newPassword" : "string"
+  }
+  ```
+
+  Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id" : "string, unique",
+          "name" : "string",
+          "email" : "string",
+          "gender" : "string",
+          "phone" : "string"
+      }
+  }
+  ```
   
   ## Delete User
   

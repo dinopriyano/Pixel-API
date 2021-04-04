@@ -1,11 +1,9 @@
 package id.dupat.pixel.service.impl
 
 import id.dupat.pixel.entity.User
+import id.dupat.pixel.exception.CustomException
 import id.dupat.pixel.exception.NotFoundException
-import id.dupat.pixel.model.user.CreateUserRequest
-import id.dupat.pixel.model.user.ListUserRequest
-import id.dupat.pixel.model.user.UpdateUserRequest
-import id.dupat.pixel.model.user.UserResponse
+import id.dupat.pixel.model.user.*
 import id.dupat.pixel.repository.UserRepository
 import id.dupat.pixel.service.UserService
 import id.dupat.pixel.util.ValidationUtil
@@ -71,6 +69,23 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
         val page = userRepository.findAll(PageRequest.of(listUserRequest.page,listUserRequest.size))
         return page
 
+    }
+
+    override fun changePassword(id: String, changePasswordRequest: ChangePasswordRequest): UserResponse {
+        val user = findProductOrThrow(id)
+        if(changePasswordRequest.oldPassword != user.password){
+            throw CustomException("Old password not valid")
+        }
+
+        validationUtil.validate(changePasswordRequest)
+        user.apply {
+            password = changePasswordRequest.newPassword!!
+            updated_at = Date()
+        }
+
+        userRepository.save(user)
+
+        return user.toUserResponse()
     }
 
     private fun findProductOrThrow(id: String): User{

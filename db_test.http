@@ -79,7 +79,7 @@ Accept: application/json
 
 ### Delete user not found
 
-DELETE http://localhost:8080/api/users/USRAU292
+DELETE http://localhost:8080/api/users/
 Accept: application/json
 
 
@@ -87,3 +87,15 @@ Accept: application/json
 
 GET http://localhost:8080/api/users?page=0&size=10
 Accept: application/json
+
+
+### Change password user
+
+PUT http://localhost:8080/api/users/USR00001/changepassword
+Content-Type: application/json
+Accept: application/json
+
+{
+  "oldPassword" : "pass",
+  "newPassword" : "081212345678"
+}

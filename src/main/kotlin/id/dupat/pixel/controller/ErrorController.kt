@@ -1,5 +1,6 @@
 package id.dupat.pixel.controller
 
+import id.dupat.pixel.exception.CustomException
 import id.dupat.pixel.exception.NotFoundException
 import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.model.WebResponse
@@ -26,6 +27,16 @@ class ErrorController {
             code = 404,
             error = true,
             message = "Data not found",
+            data = null
+        )
+    }
+
+    @ExceptionHandler(value = [CustomException::class])
+    fun customExceptionHandler(customException: CustomException): WebResponse<UserResponse?>{
+        return WebResponse(
+            code = 400,
+            error = true,
+            message = customException.message,
             data = null
         )
     }

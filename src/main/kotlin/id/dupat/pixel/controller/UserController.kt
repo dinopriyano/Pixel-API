@@ -2,11 +2,8 @@ package id.dupat.pixel.controller
 
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.model.WebPagingResponse
-import id.dupat.pixel.model.user.CreateUserRequest
-import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.model.WebResponse
-import id.dupat.pixel.model.user.ListUserRequest
-import id.dupat.pixel.model.user.UpdateUserRequest
+import id.dupat.pixel.model.user.*
 import id.dupat.pixel.service.UserService
 import id.dupat.pixel.service.impl.UserServiceImpl
 import id.dupat.pixel.util.toUserResponse
@@ -96,6 +93,21 @@ class UserController(val userService: UserService) {
             isLast = pages.isLast,
             totalPage = pages.totalPages,
             data = userResponse
+        )
+    }
+
+    @PutMapping(
+        value = ["/api/users/{id_user}/changepassword"],
+        produces = ["application/json"],
+        consumes = ["application/json"]
+    )
+    fun changePassword(@PathVariable("id_user") id:String, @RequestBody body: ChangePasswordRequest): WebResponse<UserResponse>{
+        val response = userService.changePassword(id,body)
+        return WebResponse(
+            code = 200,
+            error = false,
+            message = "Success change password",
+            data = response
         )
     }
 }
