@@ -4,11 +4,12 @@
 
 - ### Setup Database :
 
-  Setting your database in `src/main/resources/application.properties` 
+  Set your database in `src/main/resources/application.properties` 
 
-- ### Start Docker Container : 
+- ### Start Docker : 
   
-  Type on terminal `docker-compose -f docker-compose.yml up -d`
+  - First, pull MySQL Docker Images using `docker pull mysql` 
+  - And then start Pixel Docker Container using `docker-compose -f docker-compose.yml up -d`
 
 - ### Start Spring Boot Apps (Gradle) :
 
