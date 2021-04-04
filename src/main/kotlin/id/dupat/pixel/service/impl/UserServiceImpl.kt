@@ -3,14 +3,19 @@ package id.dupat.pixel.service.impl
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.exception.NotFoundException
 import id.dupat.pixel.model.user.CreateUserRequest
+import id.dupat.pixel.model.user.ListUserRequest
 import id.dupat.pixel.model.user.UpdateUserRequest
 import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.repository.UserRepository
 import id.dupat.pixel.service.UserService
 import id.dupat.pixel.util.ValidationUtil
+import id.dupat.pixel.util.toUserResponse
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
 class UserServiceImpl(val userRepository: UserRepository, val validationUtil: ValidationUtil) : UserService {
@@ -30,14 +35,14 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
 
         userRepository.save(user)
 
-        return userResponse(user)
+        return user.toUserResponse()
 
     }
 
     override fun getById(id: String): UserResponse {
         val user = findProductOrThrow(id)
 
-        return userResponse(user)
+        return user.toUserResponse()
     }
 
     override fun update(id: String, updateUserRequest: UpdateUserRequest): UserResponse {
@@ -54,12 +59,18 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
 
         userRepository.save(user)
 
-        return userResponse(user)
+        return user.toUserResponse()
     }
 
     override fun delete(id: String) {
         val user = findProductOrThrow(id)
         userRepository.delete(user)
+    }
+
+    override fun list(listUserRequest: ListUserRequest): Page<User> {
+        val page = userRepository.findAll(PageRequest.of(listUserRequest.page,listUserRequest.size))
+        return page
+
     }
 
     private fun findProductOrThrow(id: String): User{
@@ -69,18 +80,5 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
         }
 
         return user
-    }
-
-    private fun userResponse(user: User): UserResponse {
-        return UserResponse(
-            id = user.id!!,
-            name = user.name!!,
-            email = user.email!!,
-            password = user.password!!,
-            gender = user.gender!!,
-            phone = user.phone!!,
-            created_at = user.created_at,
-            updated_at = user.updated_at
-        )
     }
 }

@@ -1,11 +1,18 @@
 package id.dupat.pixel.controller
 
+import id.dupat.pixel.entity.User
+import id.dupat.pixel.model.WebPagingResponse
 import id.dupat.pixel.model.user.CreateUserRequest
 import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.model.WebResponse
+import id.dupat.pixel.model.user.ListUserRequest
 import id.dupat.pixel.model.user.UpdateUserRequest
 import id.dupat.pixel.service.UserService
+import id.dupat.pixel.service.impl.UserServiceImpl
+import id.dupat.pixel.util.toUserResponse
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
+import java.util.stream.Collectors
 
 @RestController
 class UserController(val userService: UserService) {
@@ -65,6 +72,30 @@ class UserController(val userService: UserService) {
             error = false,
             message = "Success delete user",
             data = null
+        )
+    }
+
+    @GetMapping(
+        value = ["/api/users"],
+        produces = ["application/json"]
+    )
+    fun listUser(@RequestParam(value = "size",defaultValue = "10") size: Int, @RequestParam(value = "page",defaultValue = "0") page: Int): WebPagingResponse<List<UserResponse>>{
+        val listUserRequest = ListUserRequest(
+            size = size,
+            page = page
+        )
+        val pages: Page<User> = userService.list(listUserRequest)
+        val users: List<User> = pages.get().collect(Collectors.toList())
+        val userResponse: List<UserResponse> = users.map { it.toUserResponse() }
+
+        return WebPagingResponse(
+            code = 200,
+            error = false,
+            message = "Success get user",
+            currentPage = page,
+            isLast = pages.isLast,
+            totalPage = pages.totalPages,
+            data = userResponse
         )
     }
 }

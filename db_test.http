@@ -81,3 +81,9 @@ Accept: application/json
 
 DELETE http://localhost:8080/api/users/USRAU292
 Accept: application/json
+
+
+### Get list user
+
+GET http://localhost:8080/api/users?page=0&size=10
+Accept: application/json
