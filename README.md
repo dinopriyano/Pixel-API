@@ -142,7 +142,9 @@ Request :
           "name" : "string",
           "email" : "string",
           "gender" : "string",
-          "phone" : "string"
+          "phone" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date"
       }
   }
   ```
@@ -177,7 +179,9 @@ Request :
           "name" : "string",
           "email" : "string",
           "gender" : "string",
-          "phone" : "string"
+          "phone" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date"
       }
   }
   ```

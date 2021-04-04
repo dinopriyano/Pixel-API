@@ -96,6 +96,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "oldPassword" : "pass",
-  "newPassword" : "081212345678"
+  "oldPassword" : "Password123",
+  "newPassword" : "Secret123"
 }
