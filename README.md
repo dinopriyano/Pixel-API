@@ -22,7 +22,8 @@ Request :
       "email" : "string",
       "password" : "string",
       "gender" : "string",
-      "phone" : "string"
+      "phone" : "string",
+      "photo" : "file"
   }
   ```
   
@@ -39,6 +40,7 @@ Request :
           "email" : "string",
           "gender" : "string",
           "phone" : "string",
+          "photo" : "string",
           "updated_at" : "Date",
           "deleted_at" : "Date"
       }
@@ -67,6 +69,7 @@ Request :
           "email" : "string",
           "gender" : "string",
           "phone" : "string",
+          "photo" : "string",
           "updated_at" : "Date",
           "deleted_at" : "Date"
       }
@@ -102,6 +105,7 @@ Request :
               "email" : "string",
               "gender" : "string",
               "phone" : "string",
+              "photo" : "string",
               "updated_at" : "Date",
               "deleted_at" : "Date"
           }
@@ -126,7 +130,8 @@ Request :
       "email" : "string",
       "password" : "string",
       "gender" : "string",
-      "phone" : "string"
+      "phone" : "string",
+      "photo" : "file"
   }
   ```
   
@@ -143,6 +148,7 @@ Request :
           "email" : "string",
           "gender" : "string",
           "phone" : "string",
+          "photo" : "string",
           "updated_at" : "Date",
           "deleted_at" : "Date"
       }
@@ -156,7 +162,7 @@ Request :
   - Method : PUT
   - Endpoint : `/api/users/{id_user}/changepassword`
   - Header :
-    - Content-Type: application/json
+    - Content-Type: multipart/form-data
     - Accept: application/json
   - Body :
 
@@ -180,6 +186,7 @@ Request :
           "email" : "string",
           "gender" : "string",
           "phone" : "string",
+          "photo" : "string",
           "updated_at" : "Date",
           "deleted_at" : "Date"
       }
@@ -206,3 +213,20 @@ Request :
   }
   ```
 </details>
+
+<details>
+  <summary>Images</summary>
+
+  ## Get Image
+  
+  Request :
+  
+  - Method : GET
+  - Endpoint : `/api/images/{id_image}`
+  - Header :
+    - Accept: application/json
+  
+  Response : Image
+
+</details>
+

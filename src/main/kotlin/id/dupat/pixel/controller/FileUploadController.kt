@@ -16,7 +16,7 @@ import java.io.*
 class FileUploadController(val fileService: FileService) {
 
     @GetMapping(
-        value = ["/images/{id}"],
+        value = ["/api/images/{id}"],
         produces = ["application/json"]
     )
     fun getFile(@PathVariable id: String): ResponseEntity<Resource> {
