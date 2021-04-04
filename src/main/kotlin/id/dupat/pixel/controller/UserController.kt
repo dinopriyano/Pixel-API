@@ -4,9 +4,7 @@ import id.dupat.pixel.model.CreateUserRequest
 import id.dupat.pixel.model.UserResponse
 import id.dupat.pixel.model.WebResponse
 import id.dupat.pixel.service.UserService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class UserController(val userService: UserService) {
@@ -22,6 +20,20 @@ class UserController(val userService: UserService) {
             code = 200,
             error = false,
             message = "Success create user",
+            data = response
+        )
+    }
+
+    @GetMapping(
+        value = ["/api/users/{id_product}"],
+        produces = ["application/json"]
+    )
+    fun getUser(@PathVariable("id_product") id: String): WebResponse<UserResponse>{
+        val response = userService.getById(id)
+        return WebResponse(
+            code = 200,
+            error = false,
+            message = "Success get user",
             data = response
         )
     }

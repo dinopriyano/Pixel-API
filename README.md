@@ -119,7 +119,6 @@ Request :
   
   ```json
   {
-      "id" : "string, unique",
       "name" : "string",
       "email" : "string",
       "password" : "string",

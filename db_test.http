@@ -1,0 +1,43 @@
+### Create user valid
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "USR00001",
+  "name" : "Jono Suparjono",
+  "email" : "jono@email.com",
+  "password" : "Password123",
+  "gender" : "Male",
+  "phone" : "081283027346"
+}
+
+
+### Create user invalid
+
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": "USR00002",
+  "name" : "Juki Suparjuki",
+  "email" : "juki@email.com",
+  "password" : "pass",
+  "gender" : "",
+  "phone" : ""
+}
+
+
+### Get user found
+
+GET http://localhost:8080/api/users/USR00001
+Accept: application/json
+
+
+### Get user not found
+
+GET http://localhost:8080/api/users/USRAU292
+Accept: application/json

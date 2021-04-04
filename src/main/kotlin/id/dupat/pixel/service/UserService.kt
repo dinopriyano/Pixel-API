@@ -7,4 +7,8 @@ interface UserService {
 
     fun create(createUserRequest: CreateUserRequest): UserResponse
 
+    fun getById(id: String): UserResponse
+
+    fun update()
+
 }
