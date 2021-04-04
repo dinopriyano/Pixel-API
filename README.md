@@ -1,4 +1,22 @@
-# API Spec
+# Pixel API
+
+## Setup
+
+- ### Setup Database :
+
+  Setting your database in `src/main/resources/application.properties` 
+
+- ### Start Docker Container : 
+  
+  Type on terminal `docker-compose -f docker-compose.yml up -d`
+
+- ### Start Spring Boot Apps (Gradle) :
+
+  Type on terminal `gradlew bootRun`
+
+
+
+## API Spec
 
 <details>
   <summary>User</summary>
