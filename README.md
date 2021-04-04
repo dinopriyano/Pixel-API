@@ -1,5 +1,7 @@
 # Pixel API
 
+ RESTFul API for Pixel (Upcoming open source Apps)
+
 ## Setup
 
 - ### Setup Database :
