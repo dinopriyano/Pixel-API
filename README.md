@@ -215,7 +215,7 @@ Request :
 </details>
 
 <details>
-  <summary>Images</summary>
+  <summary>Image</summary>
 
   ## Get Image
   
