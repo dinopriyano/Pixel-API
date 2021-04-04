@@ -1,14 +1,12 @@
-package id.dupat.pixel.model
+package id.dupat.pixel.model.user
 
 import org.hibernate.validator.constraints.Length
 import org.hibernate.validator.constraints.UniqueElements
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
-import javax.validation.constraints.Size
 
 data class CreateUserRequest (
 
-    @field:UniqueElements
     @field:NotBlank
     val id: String?,
 
@@ -27,6 +25,6 @@ data class CreateUserRequest (
     val gender: String?,
 
     @field:NotBlank
-    val phone: String?,
+    val phone: String?
 
 )

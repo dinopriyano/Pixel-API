@@ -14,23 +14,23 @@ data class User (
     val id: String,
 
     @Column(name = "name")
-    val name: String,
+    var name: String,
 
     @Column(name = "email")
-    val email: String,
+    var email: String,
 
     @Column(name = "password")
-    val password: String,
+    var password: String,
 
     @Column(name = "gender")
-    val gender: String,
+    var gender: String,
 
     @Column(name = "phone")
-    val phone: String,
+    var phone: String,
 
     @Column(name = "created_at")
-    val created_at: Date,
+    var created_at: Date,
 
     @Column(name = "updated_at")
-    val updated_at: Date?
+    var updated_at: Date?
 )

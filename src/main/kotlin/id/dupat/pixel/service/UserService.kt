@@ -1,7 +1,8 @@
 package id.dupat.pixel.service
 
-import id.dupat.pixel.model.CreateUserRequest
-import id.dupat.pixel.model.UserResponse
+import id.dupat.pixel.model.user.CreateUserRequest
+import id.dupat.pixel.model.user.UpdateUserRequest
+import id.dupat.pixel.model.user.UserResponse
 
 interface UserService {
 
@@ -9,6 +10,8 @@ interface UserService {
 
     fun getById(id: String): UserResponse
 
-    fun update()
+    fun update(id: String, updateUserRequest: UpdateUserRequest): UserResponse
+
+    fun delete(id: String)
 
 }

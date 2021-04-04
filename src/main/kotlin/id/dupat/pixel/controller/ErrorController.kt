@@ -1,7 +1,7 @@
 package id.dupat.pixel.controller
 
 import id.dupat.pixel.exception.NotFoundException
-import id.dupat.pixel.model.UserResponse
+import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.model.WebResponse
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice

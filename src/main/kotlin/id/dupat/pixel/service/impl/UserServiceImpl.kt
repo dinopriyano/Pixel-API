@@ -2,8 +2,9 @@ package id.dupat.pixel.service.impl
 
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.exception.NotFoundException
-import id.dupat.pixel.model.CreateUserRequest
-import id.dupat.pixel.model.UserResponse
+import id.dupat.pixel.model.user.CreateUserRequest
+import id.dupat.pixel.model.user.UpdateUserRequest
+import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.repository.UserRepository
 import id.dupat.pixel.service.UserService
 import id.dupat.pixel.util.ValidationUtil
@@ -34,13 +35,40 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
     }
 
     override fun getById(id: String): UserResponse {
+        val user = findProductOrThrow(id)
+
+        return userResponse(user)
+    }
+
+    override fun update(id: String, updateUserRequest: UpdateUserRequest): UserResponse {
+        val user = findProductOrThrow(id)
+
+        validationUtil.validate(updateUserRequest)
+        user.apply {
+            name = updateUserRequest.name!!
+            email = updateUserRequest.email!!
+            gender = updateUserRequest.gender!!
+            phone = updateUserRequest.phone!!
+            updated_at = Date()
+        }
+
+        userRepository.save(user)
+
+        return userResponse(user)
+    }
+
+    override fun delete(id: String) {
+        val user = findProductOrThrow(id)
+        userRepository.delete(user)
+    }
+
+    private fun findProductOrThrow(id: String): User{
         val user = userRepository.findByIdOrNull(id)
         if(user == null){
             throw NotFoundException()
         }
-        else{
-            return userResponse(user)
-        }
+
+        return user
     }
 
     private fun userResponse(user: User): UserResponse {

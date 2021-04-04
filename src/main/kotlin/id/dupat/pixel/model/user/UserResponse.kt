@@ -1,8 +1,6 @@
-package id.dupat.pixel.model
+package id.dupat.pixel.model.user
 
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Id
 
 class UserResponse (
     val id: String?,

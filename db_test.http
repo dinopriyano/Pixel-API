@@ -27,7 +27,7 @@ Accept: application/json
   "email" : "juki@email.com",
   "password" : "pass",
   "gender" : "",
-  "phone" : ""
+  "phone" : "081283027338"
 }
 
 
@@ -40,4 +40,44 @@ Accept: application/json
 ### Get user not found
 
 GET http://localhost:8080/api/users/USRAU292
+Accept: application/json
+
+
+### Update user valid
+
+PUT http://localhost:8080/api/users/USR00001
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name" : "Jono Sujono",
+  "email" : "jono@email.com",
+  "gender" : "Male",
+  "phone" : "081212345678"
+}
+
+
+### Update user not valid
+
+PUT http://localhost:8080/api/users/USRAU292
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name" : "",
+  "email" : "jono@email.com",
+  "gender" : "Male",
+  "phone" : "081212345678"
+}
+
+
+### Delete user found
+
+DELETE http://localhost:8080/api/users/USR00002
+Accept: application/json
+
+
+### Delete user not found
+
+DELETE http://localhost:8080/api/users/USRAU292
 Accept: application/json
