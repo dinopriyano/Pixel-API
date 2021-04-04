@@ -11,7 +11,7 @@ import javax.persistence.Table
 data class User (
 
     @Id
-    val id: String,
+    var id: String,
 
     @Column(name = "name")
     var name: String,
@@ -27,6 +27,9 @@ data class User (
 
     @Column(name = "phone")
     var phone: String,
+
+    @Column(name = "photo")
+    var photo: String?,
 
     @Column(name = "created_at")
     var created_at: Date,

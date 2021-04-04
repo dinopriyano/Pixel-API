@@ -9,6 +9,7 @@ import id.dupat.pixel.service.impl.UserServiceImpl
 import id.dupat.pixel.util.toUserResponse
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.util.stream.Collectors
 
 @RestController
@@ -17,10 +18,10 @@ class UserController(val userService: UserService) {
     @PostMapping(
         value = ["/api/users"],
         produces = ["application/json"],
-        consumes = ["application/json"]
+        consumes = ["multipart/form-data"]
     )
-    fun createUser(@RequestBody body: CreateUserRequest): WebResponse<UserResponse>{
-        val response = userService.create(body)
+    fun createUser(@RequestParam("photo") photo: MultipartFile?, body: CreateUserRequest): WebResponse<UserResponse>{
+        val response = userService.create(photo, body)
         return WebResponse(
             code = 200,
             error = false,
@@ -46,10 +47,10 @@ class UserController(val userService: UserService) {
     @PutMapping(
         value = ["/api/users/{id_user}"],
         produces = ["application/json"],
-        consumes = ["application/json"]
+        consumes = ["multipart/form-data"]
     )
-    fun updateUser(@PathVariable("id_user") id:String, @RequestBody body: UpdateUserRequest): WebResponse<UserResponse>{
-        val response = userService.update(id,body)
+    fun updateUser(@PathVariable("id_user") id:String, @RequestParam("photo") photo: MultipartFile?, body: UpdateUserRequest): WebResponse<UserResponse>{
+        val response = userService.update(id,photo,body)
         return WebResponse(
             code = 200,
             error = false,
