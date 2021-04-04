@@ -32,5 +32,5 @@ data class User (
     val created_at: Date,
 
     @Column(name = "updated_at")
-    val updated_at: Date
+    val updated_at: Date?
 )

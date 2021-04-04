@@ -7,6 +7,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: pixel123
+      MYSQL_ROOT_PASSWORD: dupat123
+      MYSQL_PASSWORD: pixel123
       MYSQL_USER: pixel
       MYSQL_DATABASE: pixel
