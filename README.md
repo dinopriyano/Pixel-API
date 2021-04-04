@@ -92,6 +92,9 @@ Request :
       "code" : "number",
       "error" : "boolean",
       "message" : "string",
+      "currentPage" : "number",
+      "isLast" : "boolean",
+      "totalPage" : "number",
       "data" : [
           {
               "id" : "string, unique",
