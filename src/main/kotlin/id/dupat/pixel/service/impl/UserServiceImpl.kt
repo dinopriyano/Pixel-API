@@ -1,5 +1,6 @@
 package id.dupat.pixel.service.impl
 
+import id.dupat.pixel.config.WebSecurityConfig
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.exception.CustomException
 import id.dupat.pixel.exception.NotFoundException
@@ -17,16 +18,17 @@ import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @Service
-class UserServiceImpl(val userRepository: UserRepository, val validationUtil: ValidationUtil, val fileService: FileService) : UserService {
+class UserServiceImpl(val userRepository: UserRepository, val validationUtil: ValidationUtil, val fileService: FileService, val webSecurityConfig: WebSecurityConfig) : UserService {
     override fun create(photo: MultipartFile?, createUserRequest: CreateUserRequest): UserResponse {
         validationUtil.validate(createUserRequest)
-        
+        isUserExist(createUserRequest.email!!)
+
         val photo = if(photo != null){fileService.uploadFile(photo)} else {null}
         val user = User(
             id = createUserRequest.id!!,
             name = createUserRequest.name!!,
             email = createUserRequest.email!!,
-            password = createUserRequest.password!!,
+            password = webSecurityConfig.passwordEncoder().encode(createUserRequest.password!!),
             gender = createUserRequest.gender!!,
             phone = createUserRequest.phone!!,
             photo = photo,
@@ -103,6 +105,13 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
         userRepository.save(user)
 
         return user.toUserResponse()
+    }
+
+    private fun isUserExist(email: String){
+        val user = userRepository.findByEmail(email)
+        if(user != null){
+            throw CustomException("This email already used")
+        }
     }
 
     private fun findUserOrThrow(id: String): User{
