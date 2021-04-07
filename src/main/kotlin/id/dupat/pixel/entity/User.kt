@@ -33,5 +33,8 @@ data class User (
     var created_at: Date,
 
     @Column(name = "updated_at")
-    var updated_at: Date?
+    var updated_at: Date?,
+
+    @OneToMany(mappedBy = "user")
+    var post: List<Post>? = null
 )
