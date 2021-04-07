@@ -63,6 +63,50 @@ Request :
   }
   ```
 
+
+## Register
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/auth/register`
+  - Header :
+    - Content-Type: multipart/form-data
+    - Accept: application/json
+  - Body :
+
+  ```json
+  {
+      "id" : "string, unique",
+      "name" : "string",
+      "email" : "string",
+      "password" : "string",
+      "gender" : "string",
+      "phone" : "string",
+      "photo" : "file"
+  }
+  ```
+
+  Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id" : "string, unique",
+          "name" : "string",
+          "email" : "string",
+          "gender" : "string",
+          "phone" : "string",
+          "photo" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date"
+      }
+  }
+  ```
+
 </details>
 
 <details>
