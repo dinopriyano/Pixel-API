@@ -22,8 +22,51 @@
 ## API Spec
 
 <details>
-  <summary>User</summary>
+  <summary>Authentication</summary>
 
+## Login
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/auth/login`
+  - Header :
+    - Content-Type: multipart/form-data
+    - Accept: application/json
+  - Body :
+
+  ```json
+  {
+      "email" : "string",
+      "password" : "string"
+  }
+  ```
+
+  Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id" : "string, unique",
+          "name" : "string",
+          "email" : "string",
+          "gender" : "string",
+          "phone" : "string",
+          "photo" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date",
+          "token" : "string"
+      }
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>User</summary>
 
 ## Create User
 
