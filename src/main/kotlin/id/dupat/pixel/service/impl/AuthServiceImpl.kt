@@ -35,7 +35,6 @@ class AuthServiceImpl(val validationUtil: ValidationUtil,val fileService: FileSe
 
         val photo = if(photo != null){fileService.uploadFile(photo)} else {null}
         val user = User(
-            id = createUserRequest.id!!,
             name = createUserRequest.name!!,
             email = createUserRequest.email!!,
             password = webSecurityConfig.passwordEncoder().encode(createUserRequest.password!!),

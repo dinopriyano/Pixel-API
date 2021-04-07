@@ -25,7 +25,7 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
 
         val photo = if(photo != null){fileService.uploadFile(photo)} else {null}
         val user = User(
-            id = createUserRequest.id!!,
+            id = null,
             name = createUserRequest.name!!,
             email = createUserRequest.email!!,
             password = webSecurityConfig.passwordEncoder().encode(createUserRequest.password!!),

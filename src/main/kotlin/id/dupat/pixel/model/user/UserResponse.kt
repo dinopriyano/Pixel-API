@@ -9,8 +9,6 @@ class UserResponse (
 
     val email: String?,
 
-    val password: String?,
-
     val gender: String?,
 
     val phone: String?,

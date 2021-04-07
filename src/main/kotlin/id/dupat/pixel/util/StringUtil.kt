@@ -27,7 +27,6 @@ fun User.toUserResponse(): UserResponse{
         id = this.id!!,
         name = this.name!!,
         email = this.email!!,
-        password = this.password!!,
         gender = this.gender!!,
         phone = this.phone!!,
         photo = if(this.photo != null){"${getBaseUrl()}/api/images/${this.photo!!}"} else{null},

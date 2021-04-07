@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank
 
 data class CreateUserRequest (
 
-    @field:NotBlank
     val id: String?,
 
     @field:NotBlank

@@ -1,17 +1,15 @@
 package id.dupat.pixel.entity
 
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "users")
 data class User (
 
     @Id
-    var id: String,
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "uuid")
+    var id: String? = null,
 
     @Column(name = "name")
     var name: String,
