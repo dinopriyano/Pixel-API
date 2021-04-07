@@ -68,6 +68,13 @@ Request :
 <details>
   <summary>User</summary>
 
+## Authentication
+
+All API in users must use this authentication
+
+- Header :
+  - Authentication : `Bearer your_api_key`
+
 ## Create User
 
 Request :
