@@ -3,7 +3,10 @@ package id.dupat.pixel.controller
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.model.WebPagingResponse
 import id.dupat.pixel.model.WebResponse
+import id.dupat.pixel.model.auth.LoginRequest
+import id.dupat.pixel.model.auth.LoginResponse
 import id.dupat.pixel.model.user.*
+import id.dupat.pixel.service.AuthService
 import id.dupat.pixel.service.UserService
 import id.dupat.pixel.service.impl.UserServiceImpl
 import id.dupat.pixel.util.toUserResponse

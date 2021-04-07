@@ -15,13 +15,11 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
-import java.lang.StringBuilder
 
 @Service
 class UserServiceImpl(val userRepository: UserRepository, val validationUtil: ValidationUtil, val fileService: FileService) : UserService {
     override fun create(photo: MultipartFile?, createUserRequest: CreateUserRequest): UserResponse {
         validationUtil.validate(createUserRequest)
-
         
         val photo = if(photo != null){fileService.uploadFile(photo)} else {null}
         val user = User(

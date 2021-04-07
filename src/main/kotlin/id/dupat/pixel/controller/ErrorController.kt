@@ -2,6 +2,7 @@ package id.dupat.pixel.controller
 
 import id.dupat.pixel.exception.CustomException
 import id.dupat.pixel.exception.NotFoundException
+import id.dupat.pixel.exception.TokenException
 import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.model.WebResponse
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -10,9 +11,24 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.validation.ConstraintViolationException
+import org.springframework.http.ResponseEntity
+
+import org.springframework.web.bind.annotation.RequestMapping
+import javax.servlet.ServletException
+
 
 @RestControllerAdvice
 class ErrorController {
+
+    @ExceptionHandler(value = [ServletException::class])
+    fun servletHandler(servletException: ServletException): WebResponse<UserResponse?>{
+        return WebResponse(
+            code = 400,
+            error = true,
+            message = servletException.message,
+            data = null
+        )
+    }
 
     @ExceptionHandler(value = [ConstraintViolationException::class])
     fun validationHandler(constraintViolationException: ConstraintViolationException): WebResponse<UserResponse?>{
@@ -40,6 +56,16 @@ class ErrorController {
             code = 400,
             error = true,
             message = customException.message,
+            data = null
+        )
+    }
+
+    @ExceptionHandler(value = [TokenException::class])
+    fun tokenExceptionHandler(tokenException: TokenException): WebResponse<UserResponse?>{
+        return WebResponse(
+            code = 401,
+            error = true,
+            message = tokenException.message,
             data = null
         )
     }

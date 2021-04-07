@@ -2,8 +2,19 @@ package id.dupat.pixel.util
 
 import id.dupat.pixel.entity.Files
 import id.dupat.pixel.entity.User
+import id.dupat.pixel.model.auth.LoginResponse
 import id.dupat.pixel.model.file.FileResponse
 import id.dupat.pixel.model.user.UserResponse
+import java.util.stream.Collectors
+
+import org.springframework.security.core.GrantedAuthority
+
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
+
+import org.springframework.security.core.authority.AuthorityUtils
+import java.util.*
+
 
 fun User.toUserResponse(): UserResponse{
     return UserResponse(
@@ -17,6 +28,44 @@ fun User.toUserResponse(): UserResponse{
         created_at = this.created_at,
         updated_at = this.updated_at
     )
+}
+
+fun User.toLoginResponse(token: String): LoginResponse{
+    return LoginResponse(
+        id = this.id!!,
+        name = this.name!!,
+        email = this.email!!,
+        password = this.password!!,
+        gender = this.gender!!,
+        phone = this.phone!!,
+        photo = if(this.photo != null){"/images/${this.photo!!}"} else{null},
+        created_at = this.created_at,
+        updated_at = this.updated_at,
+        token = token
+    )
+}
+
+fun String.getJWTToken(): String{
+    val secretKey = "SecretKey"
+    val grantedAuthorities = AuthorityUtils
+        .commaSeparatedStringToAuthorityList("ROLE_USER")
+
+    val token = Jwts
+        .builder()
+        .setId("Pixel")
+        .setSubject(this)
+        .claim("authorities",
+            grantedAuthorities.stream()
+                .map { obj: GrantedAuthority -> obj.authority }
+                .collect(Collectors.toList()))
+        .setIssuedAt(Date(System.currentTimeMillis()))
+        .setExpiration(Date(System.currentTimeMillis() + 600000))
+        .signWith(
+            SignatureAlgorithm.HS512,
+            secretKey.toByteArray()
+        ).compact()
+
+    return "Bearer $token"
 }
 
 fun Files.toFileResponse(needData: Boolean): FileResponse{
