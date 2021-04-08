@@ -12,6 +12,9 @@ data class Post (
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "uuid")
     var id: String? = null,
 
+    @Column(name = "title")
+    var title: String,
+
     @Column(name = "description")
     var description: String,
 

@@ -1,10 +1,12 @@
 package id.dupat.pixel.util
 
 import id.dupat.pixel.entity.Files
+import id.dupat.pixel.entity.Post
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.model.auth.LoginResponse
 import id.dupat.pixel.model.auth.RegisterResponse
 import id.dupat.pixel.model.file.FileResponse
+import id.dupat.pixel.model.post.PostResponse
 import id.dupat.pixel.model.user.UserResponse
 import java.util.stream.Collectors
 
@@ -60,6 +62,17 @@ fun User.toLoginResponse(token: String): LoginResponse{
         created_at = this.created_at,
         updated_at = this.updated_at,
         token = token
+    )
+}
+
+fun Post.toPostResponse(): PostResponse{
+    return PostResponse(
+        id = this.id!!,
+        title = this.title!!,
+        description = this.description!!,
+        image = this.image!!,
+        created_at = this.created_at!!,
+        updated_at = this.updated_at!!
     )
 }
 
