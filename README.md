@@ -109,7 +109,23 @@ Request :
 </details>
 
 <details>
-  <summary>User</summary>
+  <summary>Image</summary>
+
+  ## Get Image
+  
+  Request :
+  
+  - Method : GET
+  - Endpoint : `/api/images/{id_image}`
+  - Header :
+    - Accept: application/json
+  
+  Response : Image
+
+</details>
+
+<details>
+  <summary>Users</summary>
 
 ## Authentication
 
@@ -128,7 +144,7 @@ Request :
     - Content-Type: multipart/form-data
     - Accept: application/json
   - Body :
-  
+
   ```json
   {
       "name" : "string",
@@ -139,9 +155,9 @@ Request :
       "photo" : "file"
   }
   ```
-  
+
   Response :
-  
+
   ```json
   {
       "code" : "number",
@@ -159,18 +175,18 @@ Request :
       }
   }
   ```
-  
+
   ## Get User
-  
+
   Request :
-  
+
   - Method : GET
   - Endpoint : `/api/users/{id_user}`
   - Header :
     - Accept: application/json
-  
+
   Response :
-  
+
   ```json
   {
       "code" : "number",
@@ -188,11 +204,11 @@ Request :
       }
   }
   ```
-  
+
   ## List User
-  
+
   Request :
-  
+
   - Method : GET
   - Endpoint : `/api/users`
   - Header :
@@ -200,9 +216,9 @@ Request :
   - Query Params
     - page : number
     - size : number
-  
+
   Response :
-  
+
   ```json
   {
       "code" : "number",
@@ -225,18 +241,18 @@ Request :
       ]
   }
   ```
-  
+
   ## Update User
-  
+
   Request :
-  
+
   - Method : PUT
   - Endpoint : `/api/users/{id_user}`
   - Header :
     - Content-Type: multipart/form-data
     - Accept: application/json
   - Body :
-  
+
   ```json
   {
       "name" : "string",
@@ -247,9 +263,9 @@ Request :
       "photo" : "file"
   }
   ```
-  
+
   Response :
-  
+
   ```json
   {
       "code" : "number",
@@ -305,18 +321,18 @@ Request :
       }
   }
   ```
-  
+
   ## Delete User
-  
+
   Request :
-  
+
   - Method : DELETE
   - Endpoint : `/api/users/{id_user}`
   - Header :
     - Accept: application/json
-  
+
   Response :
-  
+
   ```json
   {
       "code" : "number",
@@ -327,19 +343,52 @@ Request :
   ```
 </details>
 
+
 <details>
-  <summary>Image</summary>
+  <summary>Post</summary>
 
-  ## Get Image
-  
-  Request :
-  
-  - Method : GET
-  - Endpoint : `/api/images/{id_image}`
+## Authentication
+
+All API in post must use this authentication
+
+- Header :
+  - Authorization : `Bearer your_api_key`
+
+## Create Post
+
+Request :
+
+- Method : POST
+- Endpoint : `/api/post`
   - Header :
+    - Content-Type: multipart/form-data
     - Accept: application/json
-  
-  Response : Image
+  - Body :
 
+  ```json
+  {
+      "title" : "string",
+      "description" : "string",
+      "users_id" : "string",
+      "image" : "file"
+  }
+  ```
+
+  Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id" : "string, unique",
+          "title" : "string",
+          "description" : "string",
+          "image" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date"
+      }
+  }
+  ```
 </details>
-
