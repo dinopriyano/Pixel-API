@@ -25,47 +25,6 @@ class JWTAuthorizationProvider {
     private val PREFIX: String = "Bearer "
     private val SECRET: String = "SecretKey"
 
-//    override fun doFilterInternal(
-//        request: HttpServletRequest,
-//        response: HttpServletResponse,
-//        chain: FilterChain
-//    ) {
-//        try {
-//            if (checkJWTToken(request, response)) {
-//                val claims: Claims = validateToken(request)
-//                if (claims["authorities"] != null) {
-//                    setUpSpringAuthentication(claims)
-//                } else {
-//                    SecurityContextHolder.clearContext()
-//                }
-//            } else {
-//                SecurityContextHolder.clearContext()
-//            }
-//            chain.doFilter(request, response)
-//        } catch (e: ExpiredJwtException) {
-//            response.status = HttpServletResponse.SC_FORBIDDEN
-//            response.sendError(HttpServletResponse.SC_FORBIDDEN, e.message)
-//            throw CustomException("Invalid token signature")
-//        } catch (e: SignatureException ) {
-//            response.status = HttpServletResponse.SC_BAD_REQUEST
-//            response.sendError(HttpServletResponse.SC_BAD_REQUEST, e.message)
-//            throw CustomException("Invalid token signature")
-//        }
-//        catch (e: MalformedJwtException){
-//            response.status = HttpServletResponse.SC_FORBIDDEN
-//            response.sendError(HttpServletResponse.SC_FORBIDDEN, e.message)
-//            throw CustomException("Invalid token signature")
-//        }
-//        catch (e: Exception) {
-//            response.status = HttpServletResponse.SC_FORBIDDEN
-//            response.sendError(HttpServletResponse.SC_FORBIDDEN, e.message)
-//            throw CustomException("Invalid token signature")
-//        }
-
-//        throw CustomException("Invalid token signature")
-//
-//    }
-
     public fun createToken(email: String): String{
         val grantedAuthorities = AuthorityUtils
             .commaSeparatedStringToAuthorityList("ROLE_USER")
@@ -79,7 +38,7 @@ class JWTAuthorizationProvider {
                     .map { obj: GrantedAuthority -> obj.authority }
                     .collect(Collectors.toList()))
             .setIssuedAt(Date(System.currentTimeMillis()))
-            .setExpiration(Date(System.currentTimeMillis() + 600000))
+            .setExpiration(Date(System.currentTimeMillis() + (3600000 * 24))) // 1 day
             .signWith(
                 SignatureAlgorithm.HS512,
                 SECRET.toByteArray()

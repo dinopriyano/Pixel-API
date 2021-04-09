@@ -24,7 +24,7 @@ data class Post (
     @Column(name = "created_at")
     var created_at: Date,
 
-    @Column(name = "deleted_at")
+    @Column(name = "updated_at")
     var updated_at: Date?,
 
     @ManyToOne

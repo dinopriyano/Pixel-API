@@ -70,9 +70,9 @@ fun Post.toPostResponse(): PostResponse{
         id = this.id!!,
         title = this.title!!,
         description = this.description!!,
-        image = this.image!!,
+        image = "${getBaseUrl()}/api/images/${this.image!!}",
         created_at = this.created_at!!,
-        updated_at = this.updated_at!!
+        updated_at = this.updated_at
     )
 }
 
