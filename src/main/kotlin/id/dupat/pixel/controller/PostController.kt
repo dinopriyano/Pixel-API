@@ -6,11 +6,14 @@ import id.dupat.pixel.model.PagingRequest
 import id.dupat.pixel.model.WebPagingResponse
 import id.dupat.pixel.model.WebResponse
 import id.dupat.pixel.model.auth.RegisterResponse
+import id.dupat.pixel.model.post.ListPostResponse
 import id.dupat.pixel.model.post.PostRequest
 import id.dupat.pixel.model.post.PostResponse
+import id.dupat.pixel.model.post.UpdatePostRequest
 import id.dupat.pixel.model.user.CreateUserRequest
 import id.dupat.pixel.model.user.UserResponse
 import id.dupat.pixel.service.PostService
+import id.dupat.pixel.util.toListPostResponse
 import id.dupat.pixel.util.toPostResponse
 import id.dupat.pixel.util.toUserResponse
 import org.springframework.data.domain.Page
@@ -36,6 +39,21 @@ class PostController(val postService: PostService) {
         )
     }
 
+    @PutMapping(
+        value = ["/api/post/{id_post}"],
+        produces = ["application/json"],
+        consumes = ["multipart/form-data"]
+    )
+    fun updatePost(@PathVariable("id_post") id: String, @RequestParam("image") image: MultipartFile?, body: UpdatePostRequest): WebResponse<PostResponse> {
+        val response = postService.update(id, image, body)
+        return WebResponse(
+            code = 200,
+            error = false,
+            message = "Update post success",
+            data = response
+        )
+    }
+
     @DeleteMapping(
         value = ["/api/post/{id_post}"],
         produces = ["application/json"]
@@ -51,22 +69,36 @@ class PostController(val postService: PostService) {
     }
 
     @GetMapping(
+        value = ["/api/post/{id_post}"],
+        produces = ["application/json"]
+    )
+    fun detailPost(@PathVariable("id_post") id: String): WebResponse<PostResponse>{
+        val response = postService.detail(id)
+        return WebResponse(
+            code = 200,
+            error = false,
+            message = "Success get detail post",
+            data = response
+        )
+    }
+
+    @GetMapping(
         value = ["/api/post"],
         produces = ["application/json"]
     )
-    fun listPost(@RequestParam(value = "size",defaultValue = "10") size: Int, @RequestParam(value = "page",defaultValue = "1") page: Int): WebPagingResponse<List<PostResponse>> {
+    fun listPost(@RequestParam(value = "size",defaultValue = "10") size: Int, @RequestParam(value = "page",defaultValue = "1") page: Int, @RequestParam(value = "users_id") users_id: String?): WebPagingResponse<List<ListPostResponse>> {
         val pagingRequest = PagingRequest(
             size = size,
             page = page
         )
-        val pages: Page<Post> = postService.list(pagingRequest)!!
+        val pages: Page<Post> = postService.list(pagingRequest,users_id)!!
         val posts: List<Post> = pages.get().collect(Collectors.toList())
-        val userResponse: List<PostResponse> = posts.map { it.toPostResponse() }
+        val userResponse: List<ListPostResponse> = posts.map { it.toListPostResponse() }
 
         return WebPagingResponse(
             code = 200,
             error = false,
-            message = "Success get post",
+            message = "Success get list post",
             currentPage = page,
             isLast = pages.isLast,
             totalPage = pages.totalPages,

@@ -6,7 +6,6 @@ import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 class PostRequest (
-
     @field:NotBlank
     var title: String,
 

@@ -6,6 +6,7 @@ import id.dupat.pixel.entity.User
 import id.dupat.pixel.model.auth.LoginResponse
 import id.dupat.pixel.model.auth.RegisterResponse
 import id.dupat.pixel.model.file.FileResponse
+import id.dupat.pixel.model.post.ListPostResponse
 import id.dupat.pixel.model.post.PostResponse
 import id.dupat.pixel.model.user.UserResponse
 import java.util.stream.Collectors
@@ -18,6 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.core.authority.AuthorityUtils
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.util.*
+import kotlin.collections.HashMap
 
 
 fun getBaseUrl(): String{
@@ -73,6 +75,23 @@ fun Post.toPostResponse(): PostResponse{
         image = "${getBaseUrl()}/api/images/${this.image!!}",
         created_at = this.createdAt!!,
         updated_at = this.updatedAt
+    )
+}
+
+fun Post.toListPostResponse(): ListPostResponse{
+    val map = HashMap<String,String?>()
+    map["id"] = this.user.id
+    map["name"] = this.user.name
+    map["photo"] = "${getBaseUrl()}/api/images/${this.user.photo!!}"
+
+    return ListPostResponse(
+        id = this.id!!,
+        title = this.title!!,
+        description = this.description!!,
+        image = "${getBaseUrl()}/api/images/${this.image!!}",
+        created_at = this.createdAt!!,
+        updated_at = this.updatedAt,
+        users = map
     )
 }
 
