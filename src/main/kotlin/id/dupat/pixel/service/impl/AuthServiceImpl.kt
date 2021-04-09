@@ -41,8 +41,8 @@ class AuthServiceImpl(val validationUtil: ValidationUtil,val fileService: FileSe
             gender = createUserRequest.gender!!,
             phone = createUserRequest.phone!!,
             photo = photo,
-            created_at = Date(),
-            updated_at = null
+            createdAt = Date(),
+            updatedAt = null
         )
 
         userRepository.save(user)

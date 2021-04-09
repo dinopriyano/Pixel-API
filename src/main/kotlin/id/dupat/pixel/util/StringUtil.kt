@@ -32,8 +32,8 @@ fun User.toUserResponse(): UserResponse{
         gender = this.gender!!,
         phone = this.phone!!,
         photo = if(this.photo != null){"${getBaseUrl()}/api/images/${this.photo!!}"} else{null},
-        created_at = this.created_at,
-        updated_at = this.updated_at
+        created_at = this.createdAt,
+        updated_at = this.updatedAt
     )
 }
 
@@ -45,8 +45,8 @@ fun User.toRegisterResponse(): RegisterResponse{
         gender = this.gender!!,
         phone = this.phone!!,
         photo = if(this.photo != null){"${getBaseUrl()}/api/images/${this.photo!!}"} else{null},
-        created_at = this.created_at,
-        updated_at = this.updated_at
+        created_at = this.createdAt,
+        updated_at = this.updatedAt
     )
 }
 
@@ -59,8 +59,8 @@ fun User.toLoginResponse(token: String): LoginResponse{
         gender = this.gender!!,
         phone = this.phone!!,
         photo = if(this.photo != null){"${getBaseUrl()}/api/images/${this.photo!!}"} else{null},
-        created_at = this.created_at,
-        updated_at = this.updated_at,
+        created_at = this.createdAt,
+        updated_at = this.updatedAt,
         token = token
     )
 }
@@ -71,8 +71,8 @@ fun Post.toPostResponse(): PostResponse{
         title = this.title!!,
         description = this.description!!,
         image = "${getBaseUrl()}/api/images/${this.image!!}",
-        created_at = this.created_at!!,
-        updated_at = this.updated_at
+        created_at = this.createdAt!!,
+        updated_at = this.updatedAt
     )
 }
 

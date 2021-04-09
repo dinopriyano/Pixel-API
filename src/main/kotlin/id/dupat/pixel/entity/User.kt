@@ -30,10 +30,10 @@ data class User (
     var photo: String?,
 
     @Column(name = "created_at")
-    var created_at: Date,
+    var createdAt: Date,
 
     @Column(name = "updated_at")
-    var updated_at: Date?,
+    var updatedAt: Date?,
 
     @OneToMany(mappedBy = "user")
     var post: List<Post>? = null

@@ -22,10 +22,10 @@ data class Post (
     var image: String,
 
     @Column(name = "created_at")
-    var created_at: Date,
+    var createdAt: Date,
 
     @Column(name = "updated_at")
-    var updated_at: Date?,
+    var updatedAt: Date?,
 
     @ManyToOne
     var user: User

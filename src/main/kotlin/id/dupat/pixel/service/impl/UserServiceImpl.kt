@@ -4,6 +4,7 @@ import id.dupat.pixel.config.WebSecurityConfig
 import id.dupat.pixel.entity.User
 import id.dupat.pixel.exception.CustomException
 import id.dupat.pixel.exception.NotFoundException
+import id.dupat.pixel.model.PagingRequest
 import id.dupat.pixel.model.user.*
 import id.dupat.pixel.repository.UserRepository
 import id.dupat.pixel.service.FileService
@@ -32,8 +33,8 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
             gender = createUserRequest.gender!!,
             phone = createUserRequest.phone!!,
             photo = photo,
-            created_at = Date(),
-            updated_at = null
+            createdAt = Date(),
+            updatedAt = null
         )
 
         userRepository.save(user)
@@ -71,7 +72,7 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
             gender = updateUserRequest.gender!!
             phone = updateUserRequest.phone!!
             photo = photoID
-            updated_at = Date()
+            updatedAt = Date()
         }
 
         userRepository.save(user)
@@ -84,8 +85,8 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
         userRepository.delete(user)
     }
 
-    override fun list(listUserRequest: ListUserRequest): Page<User> {
-        val page = userRepository.findAll(PageRequest.of(listUserRequest.page,listUserRequest.size))
+    override fun list(pagingRequest: PagingRequest): Page<User> {
+        val page = userRepository.findAll(PageRequest.of(pagingRequest.page-1,pagingRequest.size))
         return page
 
     }
@@ -99,7 +100,7 @@ class UserServiceImpl(val userRepository: UserRepository, val validationUtil: Va
         validationUtil.validate(changePasswordRequest)
         user.apply {
             password = changePasswordRequest.newPassword!!
-            updated_at = Date()
+            updatedAt = Date()
         }
 
         userRepository.save(user)

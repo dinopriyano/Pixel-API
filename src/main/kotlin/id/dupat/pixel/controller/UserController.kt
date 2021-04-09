@@ -1,14 +1,11 @@
 package id.dupat.pixel.controller
 
 import id.dupat.pixel.entity.User
+import id.dupat.pixel.model.PagingRequest
 import id.dupat.pixel.model.WebPagingResponse
 import id.dupat.pixel.model.WebResponse
-import id.dupat.pixel.model.auth.LoginRequest
-import id.dupat.pixel.model.auth.LoginResponse
 import id.dupat.pixel.model.user.*
-import id.dupat.pixel.service.AuthService
 import id.dupat.pixel.service.UserService
-import id.dupat.pixel.service.impl.UserServiceImpl
 import id.dupat.pixel.util.toUserResponse
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
@@ -80,8 +77,8 @@ class UserController(val userService: UserService) {
         value = ["/api/users"],
         produces = ["application/json"]
     )
-    fun listUser(@RequestParam(value = "size",defaultValue = "10") size: Int, @RequestParam(value = "page",defaultValue = "0") page: Int): WebPagingResponse<List<UserResponse>>{
-        val listUserRequest = ListUserRequest(
+    fun listUser(@RequestParam(value = "size",defaultValue = "10") size: Int, @RequestParam(value = "page",defaultValue = "1") page: Int): WebPagingResponse<List<UserResponse>>{
+        val listUserRequest = PagingRequest(
             size = size,
             page = page
         )

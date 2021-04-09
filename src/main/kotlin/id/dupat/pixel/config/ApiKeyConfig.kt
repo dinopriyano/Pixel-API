@@ -10,6 +10,6 @@ class ApiKeyConfig(val apiKeyInterceptor: ApiKeyInterceptor): WebMvcConfigurer {
     override fun addInterceptors(registry: InterceptorRegistry) {
         super.addInterceptors(registry)
 
-        registry.addWebRequestInterceptor(apiKeyInterceptor).addPathPatterns(listOf("/api/users","/api/post"))
+        registry.addWebRequestInterceptor(apiKeyInterceptor).addPathPatterns(listOf("/api/users/**","/api/post/**"))
     }
 }
