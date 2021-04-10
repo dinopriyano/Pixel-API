@@ -30,19 +30,20 @@ Request :
 
 - Method : POST
 - Endpoint : `/api/auth/login`
-  - Header :
-    - Content-Type: multipart/form-data
-    - Accept: application/json
-  - Body :
+- Header :
+  - Content-Type: multipart/form-data
+  - Accept: application/json
+- Body :
 
-  ```json
-  {
-      "email" : "string",
-      "password" : "string"
-  }
-  ```
+```json
+{
+    "email" : "string",
+    "password" : "string"
+}
+```
+  
 
-  Response :
+Response :
 
   ```json
   {
@@ -70,23 +71,23 @@ Request :
 
 - Method : POST
 - Endpoint : `/api/auth/register`
-  - Header :
-    - Content-Type: multipart/form-data
-    - Accept: application/json
-  - Body :
+- Header :
+  - Content-Type: multipart/form-data
+  - Accept: application/json
+- Body :
 
-  ```json
-  {
-      "name" : "string",
-      "email" : "string",
-      "password" : "string",
-      "gender" : "string",
-      "phone" : "string",
-      "photo" : "file"
-  }
-  ```
+```json
+{
+    "name" : "string",
+    "email" : "string",
+    "password" : "string",
+    "gender" : "string",
+    "phone" : "string",
+    "photo" : "file"
+}
+```
 
-  Response :
+Response :
 
   ```json
   {
@@ -140,21 +141,21 @@ Request :
 
 - Method : POST
 - Endpoint : `/api/users`
-  - Header :
-    - Content-Type: multipart/form-data
-    - Accept: application/json
-  - Body :
+- Header :
+  - Content-Type: multipart/form-data
+  - Accept: application/json
+- Body :
 
-  ```json
-  {
-      "name" : "string",
-      "email" : "string",
-      "password" : "string",
-      "gender" : "string",
-      "phone" : "string",
-      "photo" : "file"
-  }
-  ```
+```json
+{
+    "name" : "string",
+    "email" : "string",
+    "password" : "string",
+    "gender" : "string",
+    "phone" : "string",
+    "photo" : "file"
+}
+```
 
   Response :
 
@@ -214,8 +215,8 @@ Request :
   - Header :
     - Accept: application/json
   - Query Params
-    - page : number
-    - size : number
+    - page : number, def = 1
+    - size : number, def = 10
 
   Response :
 
@@ -360,19 +361,19 @@ Request :
 
 - Method : POST
 - Endpoint : `/api/post`
-  - Header :
+- Header :
     - Content-Type: multipart/form-data
     - Accept: application/json
-  - Body :
+- Body :
 
-  ```json
-  {
-      "title" : "string",
-      "description" : "string",
-      "users_id" : "string",
-      "image" : "file"
-  }
-  ```
+```json
+{
+    "title" : "string",
+    "description" : "string",
+    "users_id" : "string",
+    "image" : "file"
+}
+```
 
   Response :
 
@@ -389,6 +390,132 @@ Request :
           "updated_at" : "Date",
           "deleted_at" : "Date"
       }
+  }
+  ```
+
+## Detail Post
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/post/{id_post}`
+- Header :
+  - Accept: application/json
+
+Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id": "string",
+          "title": "string",
+          "description": "string",
+          "image": "string",
+          "created_at": "date",
+          "updated_at": "date"
+      }
+  }
+  ```
+
+## List Post
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/users`
+- Header :
+  - Accept: application/json
+- Query Params
+  - page : number, def = 1
+  - size : number, def = 10
+  - users_id : string, def = null
+
+Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "currentPage" : "number",
+      "isLast" : "boolean",
+      "totalPage" : "number",
+      "data" : [
+          {
+            "id": "string",
+            "title": "string",
+            "description": "string",
+            "image": "string",
+            "created_at": "date",
+            "updated_at": "date",
+            "users": {
+                "name": "string",
+                "photo": "string",
+                "id": "string"
+            }
+          }
+      ]
+  }
+  ```
+
+## Update Post
+
+Request :
+
+- Method : PUT
+- Endpoint : `/api/post/{id_post}`
+- Header :
+  - Content-Type: multipart/form-data
+  - Accept: application/json
+- Body :
+
+```json
+{
+    "title" : "string",
+    "description" : "string",
+    "users_id" : "string",
+    "image" : "file, allow null"
+}
+```
+
+Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {
+          "id" : "string, unique",
+          "title" : "string",
+          "description" : "string",
+          "image" : "string",
+          "updated_at" : "Date",
+          "deleted_at" : "Date"
+      }
+  }
+  ```
+
+## Delete Post
+
+Request :
+
+- Method : DELETE
+- Endpoint : `/api/post/{id_post}`
+- Header :
+  - Accept: application/json
+
+Response :
+
+  ```json
+  {
+      "code" : "number",
+      "error" : "boolean",
+      "message" : "string",
+      "data" : {}
   }
   ```
 </details>
