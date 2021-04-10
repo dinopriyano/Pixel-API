@@ -15,7 +15,7 @@
 
 - ### Start Spring Boot Apps (Gradle) :
 
-  Type on terminal `gradle bootRun`
+  Type on terminal `gradlew bootRun`
 
 
 
